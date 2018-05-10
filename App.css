@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'Pokemon GB';
+  src: url('/PokemonGB.woff2') format('woff2'), 
+       url('/PokemonGB.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text {
+  font-family: 'Pokemon GB';
+  font-weight: normal;
+  font-style: normal;
+}
+.text-box {
+  width: 100%;
+  min-height: 180px;
+  position: absolute;
+  bottom: 0;
+  z-index: -2;
+  
+}
+
+.searchwrapper {
+    /* height: 500px; */
+    width: 80vw;
+    margin: auto;
+    display: block;
+    position: relative;
+    bottom: 0;
+    top: 90%;
+    transform: translateY(-100%);
+}
+
+.wrapper {
+  height: 100vh;
+  background-image: url("/bg-pokedex.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.prof {
+  width: 37vw;
+  min-width: 300px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  transform: translate(-50%, -85%);
+
+}
+
+.wrapper-text {
+  
+}
+
+h1 {
+  margin-top: 0;
+}

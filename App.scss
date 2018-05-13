@@ -1,0 +1,171 @@
+@font-face {
+    font-family: 'Pokemon GB';
+    src: url('/PokemonGB.woff2') format('woff2'), 
+         url('/PokemonGB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+@mixin global-font-style {
+    font-family: 'Pokemon GB';
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin placeholder {
+    &::-webkit-input-placeholder {@content;}
+    &:-moz-placeholder           {@content;}
+    &::-moz-placeholder          {@content;}
+    &:-ms-input-placeholder      {@content;}  
+  }
+$error: #dc3545;
+$content-text: 12px;
+
+.wrapper {
+    @include global-font-style;
+    height: 100vh;
+    background: #000;
+    background-image: url("/bg-pokedex.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .prof {
+        width: 37vw;
+        min-width: 400px;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: 0;
+        bottom: 0;
+        transform: translate(-50%, -85%);
+        animation-name: example;
+        animation-duration: 3s;
+        animation-iteration-count: 1;
+    }
+    @keyframes example {
+        0%   {opacity: 0;}
+        100% {opacity: 1;}
+    }
+    .searchwrapper {
+        height: 145px;
+        width: 80vw;
+        margin: auto;
+        display: block;
+        position: relative;
+        bottom: 0;
+        top: 95%;
+        transform: translateY(-100%);
+        .text-box {
+            width: 100%;
+            min-height: 200px;
+            position: absolute;
+            bottom: 0;
+            z-index: -2;
+        }
+        .text, input {
+            font-size: 21px;
+            width: 90%;
+            margin: auto;
+        }
+        form {
+            margin: auto;
+            width: 90%;
+            margin-top: 13px;
+            p {
+                font-size: 11px;
+                color: $error;
+                position: absolute;
+            }
+            input {
+                @include global-font-style;
+                font-size: 18px;
+                border: none;
+                border-bottom: 1px solid gray;
+                padding-bottom: 5px;
+                background: transparent;
+                width: 60%;
+                margin-top: 5px;
+                &:focus {
+                    outline: none;
+                }
+            }
+            .error {
+                border-bottom: 1px solid $error;
+                color: $error;
+                @include placeholder {
+                    color: $error;
+                }
+            }
+            button {
+                color: black;
+                display: block;
+                background: transparent;
+                padding: 12px 50px;
+                border-bottom: 3px solid black;
+                position: relative;
+                border-top: 3px solid black;
+                float: right;
+                cursor: pointer;
+                @include global-font-style;
+                &:disabled {
+                   opacity: 0.4;
+                   cursor: auto;
+                }
+                &:before, &:after {
+                    content: '';
+                    top: 0;
+                    width: 3px;
+                    height: 100%;
+                    position: absolute;
+                    background: black;
+                }
+                &:before {
+                    left: -3px;
+                }
+                &:after {
+                    right: -3px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:700px){
+    .wrapper {
+        background-position-y: -50px;
+        .prof {
+            top: 28%;
+            min-width: auto;
+            width: 65vw;
+        }
+        .searchwrapper {
+            height: 280px;
+            top: 85%;
+            .text {
+                line-height: 22px;
+                font-size: 13px;
+            }
+            .text-box {
+                min-height: 315px;
+            }
+            form {
+                input {
+                    margin-top: 15px;
+                    width: 100%;
+                    font-size: $content-text;
+                    height: 100%;
+                }
+                p {
+                    font-size: 10px;
+                    position: relative;
+                }
+                button {
+                    margin-top: 25px;
+                    float: none;
+                    width: 100%;
+                    font-size: $content-text;
+                }
+            }
+        }
+    }
+}

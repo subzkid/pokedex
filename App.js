@@ -17,6 +17,7 @@ class Ewftest extends Component {
       stats: [],
       evolves: null,
       isLoading: true,
+      error: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,7 +25,10 @@ class Ewftest extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value.toLowerCase()});
+    this.setState({
+      value: event.target.value.toLowerCase()
+    
+    });
   }
 
 
@@ -65,39 +69,72 @@ class Ewftest extends Component {
 
       pokemonTypesColor();
 
-    }))
+    }))      
+    .catch((e) => {
 
+      this.setState({
 
+        error: true,
+        isLoadingButtonText: false,
 
+      })
 
-      
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    });
     
     event.preventDefault();
   }
 
 
   loading() {
+
+    const playSound = () => {
+
+      const givenSound = new Audio('/click-sound.mp3');
+      givenSound.play();
+      console.log("Play Sumthin");
+
+      setTimeout(() => {
+      this.setState({
+        
+        isLoadingButtonText:true,
+      });
+    }, 0.1);
+
+    }
+
+    const { isLoadingButtonText, error } = this.state;
+
     return (
+
       <div className="wrapper">
 
         <img className="prof" src="/prof.png" alt="professor"/>
 
+        <div className="searchwrapper">
 
-        <div class="searchwrapper">
-        <div class="text">Hello and welcom to my pokedex created with React.JS</div>
-        <form onSubmit={this.handleSubmit}>
+          <div className="text">Hello and welcome to my pokedex created with React.JS</div>
 
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <form onSubmit={this.handleSubmit}>
 
-          <input type="submit" value="Submit" />
+            <input className={error ? 'error' : null} placeholder="Search for a pokémon..." type="text" value={this.state.value} onChange={this.handleChange} />
+            <p>{error ? "The pokémon you're trying to find, doesnt exist." : null}</p>
 
-        </form>
-        <img className="text-box" src="/text-box.png" alt="professor"/>
+            <button 
+              onClick={playSound} 
+              type="submit" 
+              disabled={isLoadingButtonText}
+            >
+                {!isLoadingButtonText ? 'Search' : 'Loading...'}
+            </button>
+
+          </form>
+
+          <img className="text-box" src="/text-box.png" alt="professor"/>
+
         </div>
+
       </div>
+
     )
   }
 
@@ -144,6 +181,7 @@ class Ewftest extends Component {
 
     const { isLoading } = this.state;
 
+  
     return (
 
         <div className="begin">
